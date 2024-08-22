@@ -28,7 +28,7 @@ WORKDIR /
 RUN --mount=type=cache,target=/root/.cache/pip \
   git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git && \
   cd stable-diffusion-webui && \
-  git reset --hard v1.9.4 && \
+  git reset --hard v1.10.0 && \
   pip install -r requirements_versions.txt
 
 
@@ -55,6 +55,8 @@ RUN \
   # one of the ugliest hacks I ever wrote \
   sed -i 's/in_app_dir = .*/in_app_dir = True/g' /opt/conda/lib/python3.10/site-packages/gradio/routes.py && \
   git config --global --add safe.directory '*'
+
+RUN pip install typing_extensions>=4.5 --upgrade
 
 WORKDIR ${ROOT}
 ENV NVIDIA_VISIBLE_DEVICES=all
