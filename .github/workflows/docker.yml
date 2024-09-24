@@ -2,11 +2,7 @@ name: Build Images
 
 on:
   push:
-    branches: master
   pull_request:
-      paths:
-        - docker-compose.yml
-        - services
 
 jobs:
   build:
@@ -19,5 +15,5 @@ jobs:
     runs-on: ubuntu-latest
     name: ${{ matrix.profile }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: docker compose --profile ${{ matrix.profile }} build --progress plain
